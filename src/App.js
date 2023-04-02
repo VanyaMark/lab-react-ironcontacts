@@ -5,7 +5,7 @@ import contacts from "./contacts.json";
 function App() {
   const [ContactList, setContactList] = useState([])
   const contactsArr = contacts.slice(0, 5);
-  console.log(ContactList);
+  console.log('ContactList ', ContactList);
   console.log('contactsArr: ', contactsArr)
 
   const addNewContact = () => {
@@ -17,11 +17,34 @@ function App() {
     setContactList(newContactList)
   }
 
+  const sortByPopularity = () => {
+     if (ContactList.length > 0) {
+      const sortedByPopularity = ContactList.sort(function(c1, c2) {
+        if (c1.popularity < c2.popularity) {
+          return 1;
+        } else {return -1}
+      })
+      console.log('sorted: ', sortedByPopularity)
+    } else {
+      const sortedByPopularity = contactsArr.sort(function(c1, c2) {
+        if (c1.popularity < c2.popularity) {
+          return 1;
+        } else {return -1}
+      })
+      console.log('sorted: ', sortedByPopularity)
+      setContactList(sortedByPopularity)
+    }
+  }
+
 
   return (
-    <div>
+    <div className="App">
       <h1>IronContacts</h1>
+      <div className="button-div">
       <button onClick={addNewContact}>Add Random Contact</button>
+      <button onClick={sortByPopularity}>Sort by popularity</button>
+      <button onClick={addNewContact}>Sort by name</button>
+      </div>
       {ContactList.length === 0 ? <table>
         <thead>
           <tr>
