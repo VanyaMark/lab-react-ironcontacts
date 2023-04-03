@@ -24,10 +24,24 @@ function App() {
       })
       console.log('sorted: ', sortedByPopularity)
       setContactList(sortedByPopularity)
-      console.log('ContactList sorted: ', ContactList)
-      return sortedByPopularity;
+      console.log('ContactList sorted after setContactList: ', ContactList)
     }
 
+    const sortByName = () => {
+      const sortedByName = ContactList.sort((c1, c2) => c1.name.localeCompare(c2.name)) 
+      console.log('sortedByName: ', sortedByName)
+      setContactList(sortedByName)
+      }
+
+    const deleteContact = contactId => {
+      console.log("contactId placeholder: ", contactId)
+      const contactsAfterDeleting = ContactList.filter(contact => {
+        console.log('contact.id ', contact.id)
+        return contact.id !== contactId;
+      })
+      console.log('afterDeleting: ', contactsAfterDeleting)
+      setContactList(contactsAfterDeleting);
+    }
 
   return (
     <div className="App">
@@ -35,7 +49,7 @@ function App() {
       <div className="button-div">
       <button onClick={addNewContact}>Add Random Contact</button>
       <button onClick={sortByPopularity}>Sort by popularity</button>
-      <button onClick={addNewContact}>Sort by name</button>
+      <button onClick={sortByName}>Sort by name</button>
       </div>
 <table>
         <thead>
@@ -65,6 +79,7 @@ function App() {
               </td>
               {!contact.wonOscar ? <td>🥺</td> : <td>🏆</td>}
               {!contact.wonEmmy ? <td>🥺</td> : <td>🏆</td>}
+              <td><button onClick={() =>deleteContact(contact.id)}>delete</button></td>
             </tr>
           </tbody>
         ))}
