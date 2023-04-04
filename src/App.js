@@ -17,7 +17,7 @@ function App() {
   }
 
   const sortByPopularity = () => {
-      const sortedByPopularity = ContactList.sort(function(c1, c2) {
+      const sortedByPopularity = [...ContactList].sort(function(c1, c2) {
         if (c1.popularity < c2.popularity) {
           return 1;
         } else {return -1}
@@ -28,7 +28,7 @@ function App() {
     }
 
     const sortByName = () => {
-      const sortedByName = ContactList.sort((c1, c2) => c1.name.localeCompare(c2.name)) 
+      const sortedByName = [...ContactList].sort((c1, c2) => c1.name.localeCompare(c2.name)) 
       console.log('sortedByName: ', sortedByName)
       setContactList(sortedByName)
       }
