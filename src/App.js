@@ -10,8 +10,11 @@ function App() {
   const addNewContact = () => {
     const index=Math.floor(Math.random() * (contacts.length - 5)) + 5;
     const newContact = contacts[index]
-    console.log('newContact: ', newContact)
-    const newContactList = [...ContactList, newContact];
+    let newContactList = []
+    const doesItExist =ContactList.some(contact => newContact.id === contact.id)
+    if (!doesItExist) {
+        newContactList = [...ContactList, newContact];
+    }
     console.log('newContactList: ', newContactList)
     setContactList(newContactList)
   }
